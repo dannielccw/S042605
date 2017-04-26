@@ -32,10 +32,22 @@ public class MainActivity extends AppCompatActivity {
     {
         SQLiteDatabase db;
         db = SQLiteDatabase.openDatabase(outFilename, null, MODE_PRIVATE);
-        Cursor c = db.rawQuery("Select * from students", null);
+        //Cursor c = db.rawQuery("Select * from students", null);
+        Cursor c = db.rawQuery("Select * from students where Name=?", new String[] {"ee"});
         c.moveToFirst();
         String n = c.getString(1);
         Toast.makeText(MainActivity.this, n, Toast.LENGTH_SHORT).show();
+        db.close();
+    }
+
+    public void click2(View v)
+    {
+        SQLiteDatabase db;
+        db = SQLiteDatabase.openDatabase(outFilename, null, MODE_PRIVATE);
+        // db.execSQL("insert into students (Name, Addr, Tel) Values ('dd', '4545', '5566')");
+        db.execSQL("insert into students (Name, Addr, Tel) Values (?, ?,?)", new Object[] {"ee", "5555", "556565"});
+
+        Toast.makeText(MainActivity.this, "finish", Toast.LENGTH_SHORT).show();
         db.close();
     }
 
